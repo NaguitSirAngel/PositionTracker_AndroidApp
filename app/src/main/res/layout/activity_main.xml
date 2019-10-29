@@ -19,8 +19,8 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="136dp"
+        android:layout_height="89dp"
         android:layout_marginTop="110dp"
         android:text="New Route"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,9 +29,9 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_width="136dp"
+        android:layout_height="89dp"
+        android:layout_marginTop="40dp"
         android:text="Routes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,9 +39,9 @@
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_width="136dp"
+        android:layout_height="89dp"
+        android:layout_marginTop="40dp"
         android:text="About Us"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
