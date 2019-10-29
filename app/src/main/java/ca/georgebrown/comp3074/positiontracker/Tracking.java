@@ -7,27 +7,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class Tracking extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_tracking);
 
-        Button btnAbout= findViewById(R.id.btnAbout);
+        Button btnCancel = findViewById(R.id.btnStop);
 
-
-
-        //click About Us button
-        btnAbout.setOnClickListener(new View.OnClickListener() {
+        btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, AboutUs.class);
 
-                startActivity(i);
+               // Intent i= new Intent(view.getContext(),AddedTracker.class);
+                //startActivity(i);
             }
         });
-
 
     }
 }
