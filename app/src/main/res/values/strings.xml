@@ -7,4 +7,12 @@
     <string name="instructor_name">Przemyslaw Pawluk</string>
     <string name="back">Back</string>
     <string name="copyright">Copyright @2019</string>
+    <string-array name="rates">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
 </resources>
