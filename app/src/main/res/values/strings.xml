@@ -1,4 +1,18 @@
 <resources>
     <string name="app_name">Position Tracker</string>
-
+    <string name="about">About Us</string>
+    <string name="developers">Developers:</string>
+    <string name="dev_names">101112293 - John Aldrin Jacoldo\n101152749 - Sir Angel Naguit\n101159185 - Francis Victa\n101151657 - Maria Lilian Yang</string>
+    <string name="instructor">Instructor:</string>
+    <string name="instructor_name">Przemyslaw Pawluk</string>
+    <string name="back">Back</string>
+    <string name="copyright">Copyright @2019</string>
+    <string-array name="rates">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
 </resources>
