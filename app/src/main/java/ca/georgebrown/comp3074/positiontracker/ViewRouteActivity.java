@@ -8,12 +8,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class AddedRoute extends AppCompatActivity {
+public class ViewRouteActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_added_route);
+        setContentView(R.layout.activity_view_route);
+
 
         //View current Route button
         Button mapsBtn = findViewById(R.id.btnViewRoute);
@@ -24,7 +25,5 @@ public class AddedRoute extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-
     }
 }

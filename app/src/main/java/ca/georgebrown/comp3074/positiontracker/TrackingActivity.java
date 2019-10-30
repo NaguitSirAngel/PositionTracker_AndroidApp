@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class Tracking extends AppCompatActivity {
+public class TrackingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,12 +17,12 @@ public class Tracking extends AppCompatActivity {
         Button btnStop = findViewById(R.id.btnStop);
         Button btnCancel = findViewById(R.id.btnCancel);
 
-        //click for Stop Route recording and forward to AddedRoute View
+        //click for Stop Route recording and forward to AddedRouteActivity View
         btnStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent i= new Intent(view.getContext(),AddedRoute.class);
+                Intent i= new Intent(view.getContext(), AddedRouteActivity.class);
                 startActivity(i);
             }
         });

@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         btnNewRoute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this,Tracking.class);
+                Intent i = new Intent(MainActivity.this, TrackingActivity.class);
                 startActivity(i);
             }
         });
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         btnAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, AboutUs.class);
+                Intent i = new Intent(MainActivity.this, AboutUsActivity.class);
 
                 startActivity(i);
             }

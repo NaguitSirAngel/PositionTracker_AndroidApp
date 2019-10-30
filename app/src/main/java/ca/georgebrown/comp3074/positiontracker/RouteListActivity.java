@@ -34,7 +34,7 @@ public class RouteListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                Intent route = new Intent(view.getContext(),ViewRoute.class);
+                Intent route = new Intent(view.getContext(), ViewRouteActivity.class);
                 startActivity(route);
 
             }
