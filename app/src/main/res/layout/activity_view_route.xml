@@ -78,26 +78,12 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <Button
-        android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="80dp"
-        android:text="Back"
-        app:layout_constraintEnd_toStartOf="@+id/btnViewRoute"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
-
-    <Button
         android:id="@+id/btnShare"
-        android:layout_width="wrap_content"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginRight="60dp"
-        android:text="Share"
         android:background="@color/EggShell"
+        android:text="Share"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnViewRoute"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
@@ -148,15 +134,12 @@
 
     <Button
         android:id="@+id/btnViewRoute"
-        android:layout_width="wrap_content"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
         android:layout_marginTop="80dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
+        android:background="@color/EggShell"
         android:text="view route"
         app:layout_constraintEnd_toStartOf="@+id/btnShare"
-        app:layout_constraintStart_toEndOf="@+id/btnBack"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 </androidx.constraintlayout.widget.ConstraintLayout>
