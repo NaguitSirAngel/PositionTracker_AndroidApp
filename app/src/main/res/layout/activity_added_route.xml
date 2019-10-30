@@ -125,7 +125,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtRouteTag" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btnViewRoute"
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -144,6 +144,6 @@
         android:background="@color/EggShell"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
+        app:layout_constraintTop_toBottomOf="@+id/btnViewRoute" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
