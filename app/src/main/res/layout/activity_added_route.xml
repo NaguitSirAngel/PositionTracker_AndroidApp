@@ -130,6 +130,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="View Route"
+        android:background="@color/EggShell"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner" />
@@ -140,6 +141,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Add Route"
+        android:background="@color/EggShell"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button4" />

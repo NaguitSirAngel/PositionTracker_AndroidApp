@@ -101,10 +101,8 @@
         android:layout_marginStart="60dp"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="45dp"
-        android:layout_marginEnd="115dp"
-        android:layout_marginRight="115dp"
+        android:background="@color/EggShell"
         android:text="Back"
-        app:layout_constraintEnd_toStartOf="@+id/btnShare"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewRoute" />
 
@@ -116,6 +114,7 @@
         android:layout_marginEnd="60dp"
         android:layout_marginRight="60dp"
         android:text="Share"
+        android:background="@color/EggShell"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewRoute" />
 
