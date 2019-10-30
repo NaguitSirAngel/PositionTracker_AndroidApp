@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnAbout= findViewById(R.id.btnAbout);
         Button btnNewRoute= findViewById(R.id.btnNewRoute);
+        Button btnRoute = findViewById(R.id.btnRoute);
 
         //click New Route Button
         btnNewRoute.setOnClickListener(new View.OnClickListener() {
@@ -23,6 +24,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this,Tracking.class);
                 startActivity(i);
+            }
+        });
+
+        btnRoute.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this,RouteListActivity.class);
+                startActivity(i);
+
             }
         });
 
