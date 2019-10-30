@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -12,19 +13,14 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         final Intent i = new Intent(this, MainActivity.class);
-        //startActivity(i);
-        //finish();
 
-        new Thread(new Runnable() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
             public void run() {
-                try {
-                    Thread.sleep(1500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
                 startActivity(i);
                 finish();
             }
-        }).start();
+        }, 3000);
+
     }
 }
