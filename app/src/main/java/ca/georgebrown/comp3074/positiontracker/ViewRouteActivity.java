@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ViewRouteActivity extends AppCompatActivity {
 
@@ -53,5 +54,17 @@ public class ViewRouteActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        //Add new Route button
+        Button shareBtn = findViewById(R.id.btnShare);
+        shareBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Toast t = Toast.makeText(view.getContext(),"Route has been successfully shared!",Toast.LENGTH_LONG);
+                t.show();
+            }
+        });
+
     }
 }
