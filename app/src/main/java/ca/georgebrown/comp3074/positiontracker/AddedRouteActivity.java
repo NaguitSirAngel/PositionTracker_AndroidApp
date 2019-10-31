@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class AddedRouteActivity extends AppCompatActivity {
 
@@ -16,7 +17,7 @@ public class AddedRouteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_added_route);
 
         //View current Route button
-        Button mapsBtn = findViewById(R.id.btnViewRoute);
+        Button mapsBtn = findViewById(R.id.btnSave);
         mapsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -25,6 +26,20 @@ public class AddedRouteActivity extends AppCompatActivity {
             }
         });
 
+
+        //Add new Route button
+        Button addRouteBtn = findViewById(R.id.btnAddRoute);
+        addRouteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //toast that shows added route
+                Toast t = Toast.makeText(view.getContext(),"Route has been added!",Toast.LENGTH_LONG);
+                t.show();
+
+                Intent i = new Intent(AddedRouteActivity.this, MainActivity.class);
+                startActivity(i);
+            }
+        });
 
     }
 }

@@ -34,11 +34,22 @@ public class ViewRouteActivity extends AppCompatActivity {
         rating.setText(bRating);
 
         //View current Route button
-        Button mapsBtn = findViewById(R.id.btnViewRoute);
+        Button mapsBtn = findViewById(R.id.btnSave);
         mapsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:43.6711247,-79.4141207"));
+                startActivity(i);
+            }
+        });
+
+        //Add new Route button
+        Button editRouteBtn = findViewById(R.id.btnEditRoute);
+        editRouteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i = new Intent(ViewRouteActivity.this, EditRouteActivity.class);
                 startActivity(i);
             }
         });

@@ -76,23 +76,12 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <Button
-        android:id="@+id/btnShare"
-        android:layout_width="110dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@color/EggShell"
-        android:text="Share"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnViewRoute" />
-
-    <Button
-        android:id="@+id/btnViewRoute"
+        android:id="@+id/btnSave"
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:background="@color/EggShell"
-        android:text="View Route"
+        android:text="save"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
