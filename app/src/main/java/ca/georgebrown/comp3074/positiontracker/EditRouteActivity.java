@@ -22,7 +22,7 @@ public class EditRouteActivity extends AppCompatActivity {
                 Toast t = Toast.makeText(view.getContext(),"Successfully updated route!",Toast.LENGTH_LONG);
                 t.show();
 
-                Intent i = new Intent(EditRouteActivity.this,MainActivity.class);
+                Intent i = new Intent(EditRouteActivity.this,RouteListActivity.class);
                 startActivity(i);
             }
         });

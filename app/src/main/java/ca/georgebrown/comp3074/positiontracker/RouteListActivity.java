@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -47,6 +48,19 @@ public class RouteListActivity extends AppCompatActivity {
 
             }
         });
+
+
+        //Home button
+        Button homeBtn= findViewById(R.id.btnHome);
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i = new Intent(RouteListActivity.this, MainActivity.class);
+                startActivity(i);
+            }
+        });
+
 
     }
 }

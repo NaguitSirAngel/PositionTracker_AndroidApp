@@ -14,14 +14,25 @@ public class TrackingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking);
 
-        Button btnStop = findViewById(R.id.btnStop);
+        Button stopBtn = findViewById(R.id.btnStop);
+        Button cancelBtn = findViewById(R.id.btnCancel);
 
         //click for Stop Route recording and forward to AddedRouteActivity View
-        btnStop.setOnClickListener(new View.OnClickListener() {
+        stopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Intent i= new Intent(view.getContext(), AddedRouteActivity.class);
+                startActivity(i);
+            }
+        });
+
+        //click Home to cancel tracking
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i= new Intent(view.getContext(), MainActivity.class);
                 startActivity(i);
             }
         });
