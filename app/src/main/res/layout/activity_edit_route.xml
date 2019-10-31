@@ -89,7 +89,7 @@
 
     <EditText
         android:id="@+id/editDate"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:textSize="14sp"
@@ -100,7 +100,7 @@
 
     <EditText
         android:id="@+id/editName"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:textSize="14sp"
@@ -111,7 +111,7 @@
 
     <EditText
         android:id="@+id/editTags"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:textSize="14sp"
@@ -122,9 +122,10 @@
 
     <Spinner
         android:id="@+id/spinRatings"
-        android:layout_width="64dp"
-        android:layout_height="21dp"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
         android:layout_marginTop="36dp"
+        android:background="@color/EggShell"
         android:entries="@array/rates"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.139"

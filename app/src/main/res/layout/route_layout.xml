@@ -7,7 +7,7 @@
     <ImageView
         android:id="@+id/imageView7"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="46dp"
         android:layout_weight="0.1"
         app:srcCompat="@drawable/route" />
 
@@ -17,6 +17,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Route"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
 </LinearLayout>
