@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class ViewRouteActivity extends AppCompatActivity {
 
@@ -15,6 +16,22 @@ public class ViewRouteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_route);
 
+        TextView name = findViewById(R.id.editName);
+        TextView date = findViewById(R.id.editDate);
+        TextView tags = findViewById(R.id.editTags);
+        TextView rating = findViewById(R.id.editRating);
+
+        Bundle extras = getIntent().getExtras();
+        String bName = extras.getString("name");
+        String bDate = extras.getString("date");
+        String bTags = extras.getString("tags");
+        String bRating = extras.getString("rating");
+
+
+        name.setText(bName);
+        date.setText(bDate);
+        tags.setText(bTags);
+        rating.setText(bRating);
 
         //View current Route button
         Button mapsBtn = findViewById(R.id.btnViewRoute);
