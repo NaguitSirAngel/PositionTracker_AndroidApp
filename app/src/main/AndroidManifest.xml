@@ -8,7 +8,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        >
         <activity android:name=".SplashScreenActivity"
                   android:theme="@style/SplashTheme" >
             <intent-filter>
@@ -16,13 +17,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RouteListActivity" />
-        <activity android:name=".AddedRouteActivity" />
-        <activity android:name=".TrackingActivity" />
-        <activity android:name=".EditRouteActivity" />
-        <activity android:name=".AboutUsActivity" />
-        <activity android:name=".ViewRouteActivity" />
-        <activity android:name=".MainActivity" />
+
+        <activity android:name=".RouteListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".AddedRouteActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".TrackingActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".EditRouteActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".AboutUsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ViewRouteActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity"
+                    android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
