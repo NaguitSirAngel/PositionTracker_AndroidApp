@@ -1,6 +1,7 @@
 package ca.georgebrown.comp3074.positiontracker.data;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,17 +37,23 @@ public class MyContent {
 
 
     public static Element createElement(int position) {
-        return new Element(String.valueOf(random.nextLong()), "Route " + position, makeDetails(position));
+        return new Element(String.valueOf(random.nextLong()), "Route " + position, makeDetails(position), date());
     }
 
     public static Element createElement(String name, String details) {
-        return new Element(String.valueOf(random.nextLong()), name, details);
+        return new Element(String.valueOf(random.nextLong()), name, details, date());
     }
 
     public static void removeElement(Element item){
         Element el = ITEM_MAP.get(item.id);
         ITEMS.remove(el);
         ITEM_MAP.remove(item.id);
+    }
+
+    public static String date(){
+        Date d1 = new Date();
+
+        return d1.toString();
     }
 
     private static String makeDetails(int position) {
@@ -63,18 +70,25 @@ public class MyContent {
      */
     public static class Element {
         public final String id;
-        public final String content;
+        public final String name;
         public final String details;
+        public final String date;
+        public final String tags;
+        public final String rating;
 
-        public Element(String id, String content, String details) {
+
+        public Element(String id, String name, String details, String date) {
             this.id = id;
-            this.content = content;
+            this.name = name;
             this.details = details;
+            this.date = date;
+            tags = "tags";
+            rating = "rating";
         }
 
         @Override
         public String toString() {
-            return content;
+            return name;
         }
     }
 }

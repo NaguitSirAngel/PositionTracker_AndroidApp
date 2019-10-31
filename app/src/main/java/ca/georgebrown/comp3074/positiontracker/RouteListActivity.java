@@ -15,6 +15,7 @@ import ca.georgebrown.comp3074.positiontracker.data.MyContent;
 
 public class RouteListActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,17 +25,24 @@ public class RouteListActivity extends AppCompatActivity {
         final ArrayList<String> elements = new ArrayList<>();
 
         for(int i=0;i< MyContent.ITEMS.size();i++){
-            elements.add(MyContent.ITEMS.get(i).content);
+            elements.add(MyContent.ITEMS.get(i).name);
         }
 
-        final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, MyContent.ITEMS);
+        final RouteArrayAdapter adapter = new RouteArrayAdapter(this, R.layout.route_layout, MyContent.ITEMS);
 
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+                final MyContent.Element item = ((MyContent.Element) adapterView.getItemAtPosition(i));
                 Intent route = new Intent(view.getContext(), ViewRouteActivity.class);
+                Bundle b = new Bundle();
+                b.putString("date",item.date);
+                b.putString("name",item.name);
+                b.putString("tags",item.tags);
+                b.putString("rating",item.rating);
+                route.putExtras(b);
                 startActivity(route);
 
             }
