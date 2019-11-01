@@ -16,13 +16,23 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnAbout= findViewById(R.id.btnAbout);
         Button btnNewRoute= findViewById(R.id.btnNewRoute);
+        Button btnRoute = findViewById(R.id.btnRoute);
 
         //click New Route Button
         btnNewRoute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this,Tracking.class);
+                Intent i = new Intent(MainActivity.this, TrackingActivity.class);
                 startActivity(i);
+            }
+        });
+
+        btnRoute.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this,RouteListActivity.class);
+                startActivity(i);
+
             }
         });
 
@@ -31,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         btnAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, AboutUs.class);
+                Intent i = new Intent(MainActivity.this, AboutUsActivity.class);
 
                 startActivity(i);
             }

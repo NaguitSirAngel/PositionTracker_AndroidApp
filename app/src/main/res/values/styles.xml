@@ -2,10 +2,19 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/EtonBlue</item>
+        <item name="android:textColor">@color/EagleGreen</item>
+        <item name="colorPrimary">@color/IlluminatingEmerald</item>
+        <item name="colorPrimaryDark">@color/EagleGreen</item>
+
+
+        <item name="colorAccent">@color/PastelGray</item>
     </style>
 
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/background</item>
+    </style>
+    
 </resources>

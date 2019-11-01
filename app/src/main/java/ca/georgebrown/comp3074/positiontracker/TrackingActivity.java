@@ -7,34 +7,37 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class Tracking extends AppCompatActivity {
+public class TrackingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking);
 
-        Button btnStop = findViewById(R.id.btnStop);
-        Button btnCancel = findViewById(R.id.btnCancel);
+        Button stopBtn = findViewById(R.id.btnStop);
+        Button cancelBtn = findViewById(R.id.btnCancel);
 
-        //click for Stop Route recording and forward to AddedRoute View
-        btnStop.setOnClickListener(new View.OnClickListener() {
+        //click for Stop Route recording and forward to AddedRouteActivity View
+        stopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent i= new Intent(view.getContext(),AddedRoute.class);
+                Intent i= new Intent(view.getContext(), AddedRouteActivity.class);
                 startActivity(i);
             }
         });
 
-        //when Cancel is pressed it goes back to Home view
-        btnCancel.setOnClickListener(new View.OnClickListener() {
+        //click Home to cancel tracking
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(view.getContext(),MainActivity.class);
+
+                Intent i= new Intent(view.getContext(), MainActivity.class);
                 startActivity(i);
             }
         });
+
+
 
     }
 }

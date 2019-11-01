@@ -4,30 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewRoute">
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="My Movement"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".ViewRouteActivity">
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:text="Route Details"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="290dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/trans" />
 
     <TextView
         android:id="@+id/textView4"
@@ -77,47 +75,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
-    <TextView
-        android:id="@+id/txtViewRoute"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:autoText="false"
-        android:clickable="true"
-        android:text="View route"
-        android:textAllCaps="false"
-        android:textColor="#3F51B5"
-        android:textSize="10sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
-
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginEnd="115dp"
-        android:layout_marginRight="115dp"
-        android:text="Back"
-        app:layout_constraintEnd_toStartOf="@+id/btnShare"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewRoute" />
-
     <Button
         android:id="@+id/btnShare"
-        android:layout_width="wrap_content"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginRight="60dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@color/EggShell"
         android:text="Share"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewRoute" />
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <TextView
         android:id="@+id/editDate"
@@ -153,7 +121,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editName" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/editRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -162,4 +130,27 @@
         app:layout_constraintHorizontal_bias="0.16"
         app:layout_constraintStart_toEndOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/editTags" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="80dp"
+        android:background="@color/EggShell"
+        android:text="view route"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <Button
+        android:id="@+id/btnEditRoute"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:background="@color/EggShell"
+        android:text="Edit route"
+        app:layout_constraintEnd_toStartOf="@+id/btnShare"
+        app:layout_constraintStart_toEndOf="@+id/btnSave"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 </androidx.constraintlayout.widget.ConstraintLayout>
