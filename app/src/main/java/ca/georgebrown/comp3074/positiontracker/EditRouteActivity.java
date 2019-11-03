@@ -21,9 +21,7 @@ public class EditRouteActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast t = Toast.makeText(view.getContext(),"Successfully updated route!",Toast.LENGTH_LONG);
                 t.show();
-
-                Intent i = new Intent(EditRouteActivity.this,RouteListActivity.class);
-                startActivity(i);
+                finish();
             }
         });
     }

@@ -21,8 +21,8 @@ public class TrackingActivity extends AppCompatActivity {
         stopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent i= new Intent(view.getContext(), AddedRouteActivity.class);
+                finish();
+                Intent i = new Intent(view.getContext(), AddedRouteActivity.class);
                 startActivity(i);
             }
         });
@@ -31,9 +31,7 @@ public class TrackingActivity extends AppCompatActivity {
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent i= new Intent(view.getContext(), MainActivity.class);
-                startActivity(i);
+                finish();
             }
         });
 
