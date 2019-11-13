@@ -55,9 +55,7 @@ public class RouteListActivity extends AppCompatActivity {
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent i = new Intent(RouteListActivity.this, MainActivity.class);
-                startActivity(i);
+                finish();
             }
         });
 

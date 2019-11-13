@@ -13,7 +13,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Button btnAbout= findViewById(R.id.btnAbout);
         Button btnNewRoute= findViewById(R.id.btnNewRoute);
         Button btnRoute = findViewById(R.id.btnRoute);
@@ -42,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, AboutUsActivity.class);
-
                 startActivity(i);
             }
         });
