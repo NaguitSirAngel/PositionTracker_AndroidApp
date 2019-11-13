@@ -36,6 +36,8 @@ public class AddedRouteActivity extends AppCompatActivity {
                 Toast t = Toast.makeText(view.getContext(),"Route has been added!",Toast.LENGTH_LONG);
                 t.show();
                 finish();
+
+
             }
         });
 
