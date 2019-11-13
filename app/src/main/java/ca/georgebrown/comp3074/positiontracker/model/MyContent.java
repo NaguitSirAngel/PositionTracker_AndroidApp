@@ -1,4 +1,4 @@
-package ca.georgebrown.comp3074.positiontracker.data;
+package ca.georgebrown.comp3074.positiontracker.model;
 
 import java.util.ArrayList;
 import java.util.Date;

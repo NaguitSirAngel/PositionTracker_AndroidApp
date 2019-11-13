@@ -6,13 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import ca.georgebrown.comp3074.positiontracker.data.MyContent;
+import ca.georgebrown.comp3074.positiontracker.model.MyContent;
 
 public class RouteListActivity extends AppCompatActivity {
 

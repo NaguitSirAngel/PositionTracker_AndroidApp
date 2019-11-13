@@ -12,7 +12,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import ca.georgebrown.comp3074.positiontracker.data.MyContent;
+import ca.georgebrown.comp3074.positiontracker.model.MyContent;
 
 public class RouteArrayAdapter extends ArrayAdapter<MyContent.Element> {
 
