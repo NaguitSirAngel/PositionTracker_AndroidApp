@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import ca.georgebrown.comp3074.positiontracker.model.Route;
 
 public class TrackingActivity extends AppCompatActivity {
 
@@ -24,6 +27,7 @@ public class TrackingActivity extends AppCompatActivity {
                 finish();
                 Intent i = new Intent(view.getContext(), AddedRouteActivity.class);
                 startActivity(i);
+
             }
         });
 
