@@ -16,7 +16,6 @@ import android.widget.Toast;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 import ca.georgebrown.comp3074.positiontracker.model.Coordinates;
 import ca.georgebrown.comp3074.positiontracker.model.Route;
@@ -41,7 +40,7 @@ public class AddedRouteActivity extends AppCompatActivity {
         date.setText(getDate());
 
         //View current Route button
-        Button mapsBtn = findViewById(R.id.btnSave);
+        Button mapsBtn = findViewById(R.id.btnDelete);
         mapsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

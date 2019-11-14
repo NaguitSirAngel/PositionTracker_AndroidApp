@@ -10,9 +10,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.Serializable;
-
 import ca.georgebrown.comp3074.positiontracker.model.Route;
+import ca.georgebrown.comp3074.positiontracker.sql.DbHelper;
 
 public class ViewRouteActivity extends AppCompatActivity {
 
@@ -27,6 +26,7 @@ public class ViewRouteActivity extends AppCompatActivity {
         TextView rating = findViewById(R.id.editRating);
 
         final Route route = (Route)getIntent().getExtras().getSerializable("route");
+        final DbHelper dbHelper = new DbHelper(this);
 
         name.setText(route.getRouteName());
         date.setText(route.getDate());
@@ -34,7 +34,7 @@ public class ViewRouteActivity extends AppCompatActivity {
 //        rating.setText(route.getRating());
 
         //View current Route button
-        Button mapsBtn = findViewById(R.id.btnSave);
+        Button mapsBtn = findViewById(R.id.btnViewRoute);
         mapsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,7 +43,7 @@ public class ViewRouteActivity extends AppCompatActivity {
             }
         });
 
-        //Add new Route button
+        //Edit Route button
         Button editRouteBtn = findViewById(R.id.btnEditRoute);
         editRouteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +55,7 @@ public class ViewRouteActivity extends AppCompatActivity {
             }
         });
 
-        //Add new Route button
+        //Share Route button
         Button shareBtn = findViewById(R.id.btnShare);
         shareBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +63,18 @@ public class ViewRouteActivity extends AppCompatActivity {
 
                 Toast t = Toast.makeText(view.getContext(),"Route has been successfully shared!",Toast.LENGTH_LONG);
                 t.show();
+            }
+        });
+
+        //Deleting a Route
+        Button deleteBtn = findViewById(R.id.btnDelete);
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dbHelper.deleteRoute(route);
+                Toast.makeText(view.getContext(),"Route deleted!", Toast.LENGTH_LONG).show();
+                setResult(RESULT_OK);
+                finish();
             }
         });
 

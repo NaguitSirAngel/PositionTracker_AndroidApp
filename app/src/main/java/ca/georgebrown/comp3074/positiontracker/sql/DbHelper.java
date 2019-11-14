@@ -96,9 +96,9 @@ public class DbHelper extends SQLiteOpenHelper {
 
         while (cursor.moveToNext()){
             Route route = new Route();
-            route.setId(Integer.valueOf(cursor.getColumnIndex(DbContract.RouteEntity._ID)));
+            route.setId(cursor.getInt(cursor.getColumnIndex(DbContract.RouteEntity._ID)));
             route.setRouteName(cursor.getString(cursor.getColumnIndex(DbContract.RouteEntity.COLUMN_NAME)));
-            route.setRating(Integer.valueOf(cursor.getString(cursor.getColumnIndex(DbContract.RouteEntity.COLUMN_RATING))));
+            route.setRating(cursor.getInt(cursor.getColumnIndex(DbContract.RouteEntity.COLUMN_RATING)));
             route.setDate(cursor.getString(cursor.getColumnIndex(DbContract.RouteEntity.COLUMN_DATE)));
             routes.add(route);
         }
@@ -116,6 +116,16 @@ public class DbHelper extends SQLiteOpenHelper {
         // updating row
         return db.update(DbContract.RouteEntity.TABLE_NAME, cv, DbContract.RouteEntity._ID + " = ?",
                 new String[]{String.valueOf(route.getId())});
+    }
+
+
+    //Deletes a Route
+    public void deleteRoute(Route route){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String tableName = DbContract.RouteEntity.TABLE_NAME;
+        String whereClause = "_id=" + route.getId();
+        db.delete(tableName, whereClause, null);
+        db.close();
     }
 
 

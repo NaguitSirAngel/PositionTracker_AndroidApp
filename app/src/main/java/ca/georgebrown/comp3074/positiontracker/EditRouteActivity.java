@@ -2,7 +2,6 @@ package ca.georgebrown.comp3074.positiontracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +18,7 @@ public class EditRouteActivity extends AppCompatActivity {
 
         final Route route = (Route)getIntent().getExtras().getSerializable("route");
 
-        Button saveBtn = findViewById(R.id.btnSave);
+        Button saveBtn = findViewById(R.id.btnDelete);
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
