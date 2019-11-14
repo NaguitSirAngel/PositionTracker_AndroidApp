@@ -28,7 +28,7 @@ public class ViewRouteActivity extends AppCompatActivity {
         TextView tags = findViewById(R.id.editTags);
         TextView rating = findViewById(R.id.editRating);
 
-        Route route = (Route)getIntent().getExtras().getSerializable("route");
+        final Route route = (Route)getIntent().getExtras().getSerializable("route");
 
         name.setText(route.getRouteName());
         date.setText(route.getDate());
@@ -52,6 +52,7 @@ public class ViewRouteActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent i = new Intent(ViewRouteActivity.this, EditRouteActivity.class);
+                i.putExtra("route", route);
                 startActivity(i);
             }
         });

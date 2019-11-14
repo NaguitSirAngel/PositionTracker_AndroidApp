@@ -104,4 +104,19 @@ public class DbHelper extends SQLiteOpenHelper {
         }
         return routes;
     }
+
+    public int updateRoute(Route route) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv =new ContentValues();
+
+        cv.put(DbContract.RouteEntity.COLUMN_NAME, route.getRouteName());
+        cv.put(DbContract.RouteEntity.COLUMN_RATING, route.getRating());
+        cv.put(DbContract.RouteEntity.COLUMN_DATE, route.getDate());
+
+        // updating row
+        return db.update(DbContract.RouteEntity.TABLE_NAME, cv, DbContract.RouteEntity._ID + " = ?",
+                new String[]{String.valueOf(route.getId())});
+    }
+
+
 }
