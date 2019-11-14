@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import ca.georgebrown.comp3074.positiontracker.model.Route;
@@ -25,15 +26,19 @@ public class EditRouteActivity extends AppCompatActivity {
         final EditText name = findViewById(R.id.editName);
         final Spinner rate = findViewById(R.id.spinRatings);
         final EditText tags = findViewById(R.id.editTags);
+        final TextView date = findViewById(R.id.editDate);
 
         final Route route = (Route)getIntent().getExtras().getSerializable("route");
+        String myTags = dbHelper.stringTag(route);
         String myString = String.valueOf(route.getRating()); //the value you want the position for
         ArrayAdapter myAdap = (ArrayAdapter) rate.getAdapter(); //cast to an ArrayAdapter
         int spinnerPosition = myAdap.getPosition(myString);
 
+
         name.setText(route.getRouteName());
         rate.setSelection(spinnerPosition); //set the default according to value
-//        tags.setText(route.getTags());
+        tags.setText(myTags);
+        date.setText(route.getDate());
 
         Button saveBtn = findViewById(R.id.btnDelete);
         saveBtn.setOnClickListener(new View.OnClickListener() {
@@ -41,7 +46,9 @@ public class EditRouteActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 String rName = name.getText().toString();
-//              String rTag = rate.getText().toString();
+                String rTag = tags.getText().toString();
+                String[] tags = rTag.split(",");
+
                 int rRate = Integer.parseInt(rate.getSelectedItem().toString());
 
                 route.setRouteName(rName);
@@ -50,8 +57,25 @@ public class EditRouteActivity extends AppCompatActivity {
 
                 dbHelper.updateRoute(route);
 
+                //dbHelper.addRoute(route);
+                long id = route.getId();
+
+                //delete tags in database first before adding new tags
+                dbHelper.deleteTags(route);
+                //add the tags again
+                if(tags.length>1){
+                    for(String str : tags){
+                        dbHelper.addTag(str,id);
+                    }
+                }else {
+                    dbHelper.addTag(rTag, id);
+                }
+
                 Toast t = Toast.makeText(view.getContext(),"Successfully updated route!",Toast.LENGTH_LONG);
                 t.show();
+                setResult(1);
+
+
                 finish();
             }
         });

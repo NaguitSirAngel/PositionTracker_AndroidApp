@@ -84,14 +84,14 @@ public class AddedRouteActivity extends AppCompatActivity {
                 route.setDate(getDate());
 
                 //dbHelper.addRoute(route);
-                long id = addRoute(route);
+                long id = dbHelper.addRoute(route);
 
                 if(tags.length>1){
                     for(String str : tags){
-                    addTag(str,id);
+                    dbHelper.addTag(str,id);
                     }
                 }else {
-                    addTag(rTag, id);
+                    dbHelper.addTag(rTag, id);
                 }
 
 
@@ -113,22 +113,4 @@ public class AddedRouteActivity extends AppCompatActivity {
         return DateFormat.getDateInstance().format(calendar.getTime());
     }
 
-    private long addTag(String word1, long id){
-        DbHelper dbHelper = new DbHelper(this);
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        cv.put(DbContract.TagEntity.COLUMN_TAG, word1);
-        cv.put(DbContract.TagEntity.COLUMN_ROUTEID, id);
-        return db.insert(DbContract.TagEntity.TABLE_NAME, null, cv);
-    }
-
-    private long addRoute(Route route){
-        DbHelper dbHelper = new DbHelper(this);
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        cv.put(DbContract.RouteEntity.COLUMN_NAME, route.getRouteName());
-        cv.put(DbContract.RouteEntity.COLUMN_RATING, route.getRating());
-        cv.put(DbContract.RouteEntity.COLUMN_DATE, route.getDate());
-        return db.insert(DbContract.RouteEntity.TABLE_NAME, null, cv);
-    }
 }
