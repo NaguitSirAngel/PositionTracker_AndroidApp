@@ -2,7 +2,9 @@ package ca.georgebrown.comp3074.positiontracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,11 +17,13 @@ import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
 import ca.georgebrown.comp3074.positiontracker.model.Coordinates;
 import ca.georgebrown.comp3074.positiontracker.model.Route;
+import ca.georgebrown.comp3074.positiontracker.sql.DbContract;
 import ca.georgebrown.comp3074.positiontracker.sql.DbHelper;
 
 public class AddedRouteActivity extends AppCompatActivity {
@@ -59,8 +63,8 @@ public class AddedRouteActivity extends AppCompatActivity {
             public void onClick(final View view) {
 
                 //toast that shows added route
-                Toast t = Toast.makeText(view.getContext(),"Route has been added!",Toast.LENGTH_LONG);
-                t.show();
+                //Toast t = Toast.makeText(view.getContext(),"Route has been added!",Toast.LENGTH_LONG);
+                //t.show();
 
                 //example 1
                 ArrayList<String> tags = new ArrayList<>();
@@ -69,16 +73,28 @@ public class AddedRouteActivity extends AppCompatActivity {
                 String rName = routeName.getText().toString();
                 String rTag = routeTag.getText().toString();
 
-                tags.add(rTag);
+                tags = (ArrayList<String>) Arrays.asList(rTag.split(","));
+
+                //tags.add(rTag);
 
                 int rRate = Integer.parseInt(rate.getSelectedItem().toString());
                 Route route = new Route();
                 route.setRouteName(rName);
                 route.setRating(rRate);
-                route.setTags(tags);
                 route.setDate(getDate());
 
-                dbHelper.addRoute(route);
+                //dbHelper.addRoute(route);
+                long id = AddRoute(route);
+
+                if(tags.size()>1){
+                    for(String str : tags){
+                    AddTag(str,id);
+                    }
+                }else {
+                    AddTag(rTag, id);
+                }
+
+
                 Toast.makeText(view.getContext(),"Successfully Added Route", Toast.LENGTH_LONG).show(); //bubble at the bottom
 
                 new Handler().postDelayed(new Runnable() {
@@ -95,5 +111,24 @@ public class AddedRouteActivity extends AppCompatActivity {
     private String getDate(){
         Calendar calendar = Calendar.getInstance();
         return DateFormat.getDateInstance().format(calendar.getTime());
+    }
+
+    private long AddTag(String word1, long id){
+        DbHelper dbHelper = new DbHelper(this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(DbContract.TagEntity.COLUMN_TAG, word1);
+        cv.put(DbContract.TagEntity.COLUMN_ROUTEID, id);
+        return db.insert(DbContract.TagEntity.TABLE_NAME, null, cv);
+    }
+
+    private long AddRoute(Route route){
+        DbHelper dbHelper = new DbHelper(this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(DbContract.RouteEntity.COLUMN_NAME, route.getRouteName());
+        cv.put(DbContract.RouteEntity.COLUMN_RATING, route.getRating());
+        cv.put(DbContract.RouteEntity.COLUMN_DATE, route.getDate());
+        return db.insert(DbContract.RouteEntity.TABLE_NAME, null, cv);
     }
 }
