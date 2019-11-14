@@ -6,8 +6,8 @@ public class Coordinates implements Serializable {
 
     private int idCoord;
     private int idRoute;
-    private float longitude;
-    private float latitude;
+    private double longitude;
+    private double latitude;
     private float accuracy;
     private long timestamp;
 
@@ -28,19 +28,19 @@ public class Coordinates implements Serializable {
         this.idRoute = idRoute;
     }
 
-    public float getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(float longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
-    public float getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(float latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 

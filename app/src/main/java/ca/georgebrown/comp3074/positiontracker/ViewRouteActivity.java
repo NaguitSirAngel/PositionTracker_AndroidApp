@@ -33,6 +33,7 @@ public class ViewRouteActivity extends AppCompatActivity {
         name.setText(route.getRouteName());
         date.setText(route.getDate());
 
+        tags.setText(String.valueOf(route.getId()));
         rating.setText(String.valueOf(route.getRating()));
 
         //View current Route button

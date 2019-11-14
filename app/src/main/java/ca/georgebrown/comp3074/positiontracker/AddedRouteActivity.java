@@ -23,14 +23,22 @@ import ca.georgebrown.comp3074.positiontracker.sql.DbHelper;
 
 public class AddedRouteActivity extends AppCompatActivity {
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_added_route);
 
         final DbHelper dbHelper = new DbHelper(this);
+
+        //getting route coordinates
+        final ArrayList<Coordinates> coordinates = (ArrayList<Coordinates>)getIntent().getExtras().getSerializable("coordinates");
+
+        // TESTING
+        for(Coordinates c : coordinates){
+            System.out.println(c.getLatitude() + "\t " + c.getLongitude());
+        }
+        // TESTING
+
 
         final EditText routeName = findViewById(R.id.txtRouteName);
         final EditText routeTag = findViewById(R.id.txtRouteTag);
@@ -48,8 +56,6 @@ public class AddedRouteActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-
 
         //Add new Route button
         Button addRouteBtn = findViewById(R.id.btnAddRoute);
