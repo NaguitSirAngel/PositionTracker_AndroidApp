@@ -67,13 +67,14 @@ public class AddedRouteActivity extends AppCompatActivity {
                 //t.show();
 
                 //example 1
-                ArrayList<String> tags = new ArrayList<>();
+                //ArrayList<String> tags = new ArrayList<>();
                 ArrayList<Coordinates> coord = new ArrayList<>();
 
                 String rName = routeName.getText().toString();
                 String rTag = routeTag.getText().toString();
 
-                tags = (ArrayList<String>) Arrays.asList(rTag.split(","));
+                //ArrayList<String> tags = (ArrayList<String>)Arrays.asList(rTag.split(","));
+                String[] tags = rTag.split(",");
 
                 //tags.add(rTag);
 
@@ -84,14 +85,14 @@ public class AddedRouteActivity extends AppCompatActivity {
                 route.setDate(getDate());
 
                 //dbHelper.addRoute(route);
-                long id = AddRoute(route);
+                long id = addRoute(route);
 
-                if(tags.size()>1){
+                if(tags.length>1){
                     for(String str : tags){
-                    AddTag(str,id);
+                    addTag(str,id);
                     }
                 }else {
-                    AddTag(rTag, id);
+                    addTag(rTag, id);
                 }
 
 
@@ -113,7 +114,7 @@ public class AddedRouteActivity extends AppCompatActivity {
         return DateFormat.getDateInstance().format(calendar.getTime());
     }
 
-    private long AddTag(String word1, long id){
+    private long addTag(String word1, long id){
         DbHelper dbHelper = new DbHelper(this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -122,7 +123,7 @@ public class AddedRouteActivity extends AppCompatActivity {
         return db.insert(DbContract.TagEntity.TABLE_NAME, null, cv);
     }
 
-    private long AddRoute(Route route){
+    private long addRoute(Route route){
         DbHelper dbHelper = new DbHelper(this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();

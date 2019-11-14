@@ -96,7 +96,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         while (cursor.moveToNext()){
             Route route = new Route();
-            route.setId(Integer.valueOf(cursor.getColumnIndex(DbContract.RouteEntity._ID)));
+            route.setId(cursor.getInt(Integer.valueOf(cursor.getColumnIndex(DbContract.RouteEntity._ID))));
             route.setRouteName(cursor.getString(cursor.getColumnIndex(DbContract.RouteEntity.COLUMN_NAME)));
             route.setRating(Integer.valueOf(cursor.getString(cursor.getColumnIndex(DbContract.RouteEntity.COLUMN_RATING))));
             route.setDate(cursor.getString(cursor.getColumnIndex(DbContract.RouteEntity.COLUMN_DATE)));

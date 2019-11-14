@@ -3,6 +3,8 @@ package ca.georgebrown.comp3074.positiontracker;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -11,8 +13,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import ca.georgebrown.comp3074.positiontracker.model.Route;
+import ca.georgebrown.comp3074.positiontracker.sql.DbContract;
+import ca.georgebrown.comp3074.positiontracker.sql.DbHelper;
 
 public class ViewRouteActivity extends AppCompatActivity {
 
@@ -21,6 +27,7 @@ public class ViewRouteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_route);
 
+
         TextView name = findViewById(R.id.editName);
         TextView date = findViewById(R.id.editDate);
         TextView tags = findViewById(R.id.editTags);
@@ -28,9 +35,21 @@ public class ViewRouteActivity extends AppCompatActivity {
 
         Route route = (Route)getIntent().getExtras().getSerializable("route");
 
+
+        String myTags = "";
+        Cursor c = getTags(String.valueOf(route.getId()));
+        List l = new ArrayList();
+        while (c.moveToNext()){
+            String w = c.getString(c.getColumnIndex(DbContract.TagEntity.COLUMN_TAG));
+            l.add(w);
+        }
+
+        myTags = android.text.TextUtils.join(",", l);
+
+
         name.setText(route.getRouteName());
         date.setText(route.getDate());
-//        tags.setText(route.getTags().get(0));
+        tags.setText(myTags);
         rating.setText(String.valueOf(route.getRating()));
 
         //View current Route button
@@ -66,4 +85,21 @@ public class ViewRouteActivity extends AppCompatActivity {
         });
 
     }
+
+    private Cursor getTags(String id){
+        final DbHelper dbHelper = new DbHelper(this);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String[] projection = {DbContract.TagEntity._ID, DbContract.TagEntity.COLUMN_TAG, DbContract.TagEntity.COLUMN_ROUTEID};
+        String selection = DbContract.TagEntity.COLUMN_ROUTEID+"=?"; //WordContract.WordEntity.COLUMN_NAME_WORD1+"=?";
+        String[] selectionArgs = {id}; //{"test"}
+        return db.query(
+                DbContract.TagEntity.TABLE_NAME,  //table name
+                projection, //colums we select
+                selection, //columns for WHERE clause
+                selectionArgs, //parameters for where clause
+                null, //groupby
+                null, //having
+                null); //sorting
+    }
+
 }
