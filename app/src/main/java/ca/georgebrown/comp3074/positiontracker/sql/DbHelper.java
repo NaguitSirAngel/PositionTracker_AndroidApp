@@ -111,7 +111,6 @@ public class DbHelper extends SQLiteOpenHelper {
 
         cv.put(DbContract.RouteEntity.COLUMN_NAME, route.getRouteName());
         cv.put(DbContract.RouteEntity.COLUMN_RATING, route.getRating());
-        cv.put(DbContract.RouteEntity.COLUMN_DATE, route.getDate());
 
         // updating row
         return db.update(DbContract.RouteEntity.TABLE_NAME, cv, DbContract.RouteEntity._ID + " = ?",

@@ -31,7 +31,7 @@ public class ViewRouteActivity extends AppCompatActivity {
         name.setText(route.getRouteName());
         date.setText(route.getDate());
 //        tags.setText(route.getTags().get(0));
-//        rating.setText(route.getRating());
+         rating.setText(String.valueOf(route.getRating()));
 
         //View current Route button
         Button mapsBtn = findViewById(R.id.btnViewRoute);
