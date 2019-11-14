@@ -16,7 +16,6 @@ import android.widget.Toast;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 import ca.georgebrown.comp3074.positiontracker.model.Coordinates;
 import ca.georgebrown.comp3074.positiontracker.model.Route;

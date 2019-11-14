@@ -10,9 +10,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.Serializable;
+
+import java.util.ArrayList;
 
 import ca.georgebrown.comp3074.positiontracker.model.Route;
+import ca.georgebrown.comp3074.positiontracker.model.Tag;
 
 public class ViewRouteActivity extends AppCompatActivity {
 
@@ -30,8 +32,8 @@ public class ViewRouteActivity extends AppCompatActivity {
 
         name.setText(route.getRouteName());
         date.setText(route.getDate());
-//        tags.setText(route.getTags().get(0));
-//        rating.setText(route.getRating());
+
+        rating.setText(String.valueOf(route.getRating()));
 
         //View current Route button
         Button mapsBtn = findViewById(R.id.btnSave);
