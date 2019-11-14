@@ -14,7 +14,7 @@ public final class DbContract {
     public static class CoordinatesEntity implements BaseColumns {
         public static final String TABLE_NAME = "coordinates"; // name of your table
         public static final String COLUMN_ROUTEID = "route_id";
-        public static final String COLUMN_LONGITUTDE = "longitude";
+        public static final String COLUMN_LONGITUDE = "longitude";
         public static final String COLUMN_LATITUDE = "latitude";
         public static final String COLUMN_ACCURACY = "accuracy";
         public static final String COLUMN_TIMESTAMP = "timestamp";
@@ -53,7 +53,7 @@ public final class DbContract {
     public static final String SQL_CREATE_COORDINATES= "CREATE TABLE "+
             CoordinatesEntity.TABLE_NAME+" ( "+
             CoordinatesEntity._ID+" INTEGER PRIMARY KEY, "+
-            CoordinatesEntity.COLUMN_LONGITUTDE+" REAL, "+
+            CoordinatesEntity.COLUMN_LONGITUDE+" REAL, "+
             CoordinatesEntity.COLUMN_LATITUDE+" REAL, "+
             CoordinatesEntity.COLUMN_ACCURACY+" REAL, "+
             CoordinatesEntity.COLUMN_TIMESTAMP+" TEXT,"+

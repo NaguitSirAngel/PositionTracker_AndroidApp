@@ -10,6 +10,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
+
+import ca.georgebrown.comp3074.positiontracker.model.Route;
+
 public class ViewRouteActivity extends AppCompatActivity {
 
     @Override
@@ -22,17 +26,12 @@ public class ViewRouteActivity extends AppCompatActivity {
         TextView tags = findViewById(R.id.editTags);
         TextView rating = findViewById(R.id.editRating);
 
-        Bundle extras = getIntent().getExtras();
-        String bName = extras.getString("name");
-        String bDate = extras.getString("date");
-        String bTags = extras.getString("tags");
-        String bRating = extras.getString("rating");
+        Route route = (Route)getIntent().getExtras().getSerializable("route");
 
-
-        name.setText(bName);
-        date.setText(bDate);
-        tags.setText(bTags);
-        rating.setText(bRating);
+        name.setText(route.getRouteName());
+        date.setText(route.getDate());
+//        tags.setText(route.getTags().get(0));
+//        rating.setText(route.getRating());
 
         //View current Route button
         Button mapsBtn = findViewById(R.id.btnSave);

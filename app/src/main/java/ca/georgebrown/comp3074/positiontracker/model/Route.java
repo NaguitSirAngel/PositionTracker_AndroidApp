@@ -1,13 +1,15 @@
 package ca.georgebrown.comp3074.positiontracker.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
-public class Route {
+public class Route implements Serializable {
 
+    private int rating;
     private int id;
     private String routeName;
-    private int rating;
-    private long date;
+    private String date;
     private ArrayList<String> tags;
     private ArrayList<Coordinates> route;
 
@@ -35,11 +37,11 @@ public class Route {
         this.rating = rating;
     }
 
-    public long getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(long date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

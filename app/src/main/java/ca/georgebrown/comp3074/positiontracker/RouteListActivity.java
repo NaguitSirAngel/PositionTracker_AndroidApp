@@ -11,7 +11,8 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import ca.georgebrown.comp3074.positiontracker.model.MyContent;
+import ca.georgebrown.comp3074.positiontracker.model.Route;
+import ca.georgebrown.comp3074.positiontracker.sql.DbHelper;
 
 public class RouteListActivity extends AppCompatActivity {
 
@@ -21,30 +22,22 @@ public class RouteListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route_list);
 
+        final DbHelper dbHelper = new DbHelper(this);
+
         final ListView list = findViewById(R.id.list);
-        final ArrayList<String> elements = new ArrayList<>();
+        final ArrayList<Route> routes = dbHelper.getAllRoutes();
 
-        for(int i=0;i< MyContent.ITEMS.size();i++){
-            elements.add(MyContent.ITEMS.get(i).name);
-        }
-
-        final RouteArrayAdapter adapter = new RouteArrayAdapter(this, R.layout.route_layout, MyContent.ITEMS);
+        final RouteArrayAdapter adapter = new RouteArrayAdapter(this, R.layout.route_layout, routes);
 
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                final MyContent.Element item = ((MyContent.Element) adapterView.getItemAtPosition(i));
-                Intent route = new Intent(view.getContext(), ViewRouteActivity.class);
-                Bundle b = new Bundle();
-                b.putString("date",item.date);
-                b.putString("name",item.name);
-                b.putString("tags",item.tags);
-                b.putString("rating",item.rating);
-                route.putExtras(b);
-                startActivity(route);
-
+                final Route route = ((Route) adapterView.getItemAtPosition(i));
+                Intent intent = new Intent(view.getContext(), ViewRouteActivity.class);
+                intent.putExtra("route", route);
+                startActivity(intent);
             }
         });
 
