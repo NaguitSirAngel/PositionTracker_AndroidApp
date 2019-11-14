@@ -111,11 +111,20 @@ public class DbHelper extends SQLiteOpenHelper {
 
         cv.put(DbContract.RouteEntity.COLUMN_NAME, route.getRouteName());
         cv.put(DbContract.RouteEntity.COLUMN_RATING, route.getRating());
-        cv.put(DbContract.RouteEntity.COLUMN_DATE, route.getDate());
 
         // updating row
         return db.update(DbContract.RouteEntity.TABLE_NAME, cv, DbContract.RouteEntity._ID + " = ?",
                 new String[]{String.valueOf(route.getId())});
+    }
+
+
+    //Deletes a Route
+    public void deleteRoute(Route route){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String tableName = DbContract.RouteEntity.TABLE_NAME;
+        String whereClause = "_id=" + route.getId();
+        db.delete(tableName, whereClause, null);
+        db.close();
     }
 
 
