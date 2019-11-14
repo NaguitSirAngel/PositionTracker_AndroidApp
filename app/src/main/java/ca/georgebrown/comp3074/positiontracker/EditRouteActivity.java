@@ -8,12 +8,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import ca.georgebrown.comp3074.positiontracker.model.Route;
+
 public class EditRouteActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_route);
+
+        final Route route = (Route)getIntent().getExtras().getSerializable("route");
 
         Button saveBtn = findViewById(R.id.btnSave);
         saveBtn.setOnClickListener(new View.OnClickListener() {
