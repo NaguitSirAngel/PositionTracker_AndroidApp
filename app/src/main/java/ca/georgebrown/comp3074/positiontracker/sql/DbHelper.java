@@ -51,15 +51,6 @@ public class DbHelper extends SQLiteOpenHelper {
         return addReturn;
     }
 
-//    private long addRoute(Route route){
-//        DbHelper dbHelper = new DbHelper(this);
-//        SQLiteDatabase db = dbHelper.getWritableDatabase();
-//        ContentValues cv = new ContentValues();
-//        cv.put(DbContract.RouteEntity.COLUMN_NAME, route.getRouteName());
-//        cv.put(DbContract.RouteEntity.COLUMN_RATING, route.getRating());
-//        cv.put(DbContract.RouteEntity.COLUMN_DATE, route.getDate());
-//        return db.insert(DbContract.RouteEntity.TABLE_NAME, null, cv);
-//    }
 
     //adds Tags
     public long addTags(Tag tag, Route route){
@@ -125,6 +116,7 @@ public class DbHelper extends SQLiteOpenHelper {
         return routes;
     }
 
+    //updates a route
     public int updateRoute(Route route) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv =new ContentValues();
@@ -146,6 +138,36 @@ public class DbHelper extends SQLiteOpenHelper {
         db.delete(tableName, whereClause, null);
         db.close();
     }
+
+    //get route
+    public Route getRoute(int id){
+        Route route = new Route();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] projection = {DbContract.RouteEntity._ID,
+                DbContract.RouteEntity.COLUMN_NAME,
+                DbContract.RouteEntity.COLUMN_RATING,
+                DbContract.RouteEntity.COLUMN_DATE};
+
+        Cursor cursor = db.query(
+                DbContract.RouteEntity.TABLE_NAME,  //table name
+                projection, //colums we select
+                "_id="+id, //columns for WHERE clause
+                null, //parameters for where clause
+                null, //groupby
+                null, //having
+                null); //sorting
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        route.setId(cursor.getInt(cursor.getColumnIndex(DbContract.RouteEntity._ID)));
+        route.setRouteName(cursor.getString(cursor.getColumnIndex(DbContract.RouteEntity.COLUMN_NAME)));
+        route.setRating(cursor.getInt(cursor.getColumnIndex(DbContract.RouteEntity.COLUMN_RATING)));
+        route.setDate(cursor.getString(cursor.getColumnIndex(DbContract.RouteEntity.COLUMN_DATE)));
+
+        return route;
+    }
+
 
     private Cursor getTags(String id){
         SQLiteDatabase db = this.getReadableDatabase();

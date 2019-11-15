@@ -76,7 +76,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtDate" />
 
     <Button
-        android:id="@+id/btnDelete"
+        android:id="@+id/btnSave"
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
