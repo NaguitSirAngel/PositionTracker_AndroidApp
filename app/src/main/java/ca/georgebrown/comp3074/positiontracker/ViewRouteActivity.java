@@ -2,43 +2,30 @@ package ca.georgebrown.comp3074.positiontracker;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import ca.georgebrown.comp3074.positiontracker.model.Route;
 import ca.georgebrown.comp3074.positiontracker.sql.DbHelper;
 
+
 public class ViewRouteActivity extends AppCompatActivity {
+    public static int REQUEST_CODE = 2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_route);
 
-        TextView name = findViewById(R.id.editName);
-        TextView date = findViewById(R.id.editDate);
-        TextView tags = findViewById(R.id.editTags);
-        TextView rating = findViewById(R.id.editRating);
-
-        final Route route = (Route)getIntent().getExtras().getSerializable("route");
         final DbHelper dbHelper = new DbHelper(this);
-
-        String myTags = dbHelper.stringTag(route);
-
-        name.setText(route.getRouteName());
-        date.setText(route.getDate());
-        tags.setText(myTags);
-        rating.setText(String.valueOf(route.getRating()));
+        final Route route = (Route)getIntent().getExtras().getSerializable("route");
+        //calls function to fill the textboxes with info from route
+        populateTextbox(route);
 
 
         //View current Route button
@@ -58,8 +45,8 @@ public class ViewRouteActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent i = new Intent(ViewRouteActivity.this, EditRouteActivity.class);
-                i.putExtra("route", route);
-                startActivity(i);
+                i.putExtra("route_id", route.getId());
+                startActivityForResult(i,REQUEST_CODE);
             }
         });
 
@@ -75,7 +62,7 @@ public class ViewRouteActivity extends AppCompatActivity {
         });
 
         //Deleting a Route
-        Button deleteBtn = findViewById(R.id.btnDelete);
+        Button deleteBtn = findViewById(R.id.btnSave);
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,4 +75,37 @@ public class ViewRouteActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==REQUEST_CODE){
+              if(resultCode== RESULT_OK){
+                  Route route = (Route)data.getSerializableExtra("route");
+                  populateTextbox(route);
+              }
+        }
+    }
+
+    public void populateTextbox(Route route){
+        TextView name = findViewById(R.id.editName);
+        TextView date = findViewById(R.id.editDate);
+        TextView tags = findViewById(R.id.editTags);
+        TextView rating = findViewById(R.id.editRating);
+
+        DbHelper dbHelper = new DbHelper(this);
+
+        String myTags = dbHelper.stringTag(route);
+
+        name.setText(route.getRouteName());
+        date.setText(route.getDate());
+        tags.setText(myTags);
+        rating.setText(String.valueOf(route.getRating()));
+    }
+
+    @Override
+    public void onBackPressed() {
+        // When the user hits the back button set the resultCode to RESULT_OK so list will be updated
+        setResult(RESULT_OK);
+        super.onBackPressed();
+    }
 }

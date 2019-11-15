@@ -2,6 +2,8 @@ package ca.georgebrown.comp3074.positiontracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -13,6 +15,8 @@ import android.widget.Toast;
 
 import ca.georgebrown.comp3074.positiontracker.model.Route;
 import ca.georgebrown.comp3074.positiontracker.sql.DbHelper;
+
+import static ca.georgebrown.comp3074.positiontracker.RouteListActivity.REQUEST_CODE;
 
 public class EditRouteActivity extends AppCompatActivity {
 
@@ -28,7 +32,9 @@ public class EditRouteActivity extends AppCompatActivity {
         final EditText tags = findViewById(R.id.editTags);
         final TextView date = findViewById(R.id.editDate);
 
-        final Route route = (Route)getIntent().getExtras().getSerializable("route");
+//        final Route route = (Route)getIntent().getExtras().getSerializable("route");
+        int routeId = getIntent().getExtras().getInt("route_id");
+        final Route route = dbHelper.getRoute(routeId);
         String myTags = dbHelper.stringTag(route);
         String myString = String.valueOf(route.getRating()); //the value you want the position for
         ArrayAdapter myAdap = (ArrayAdapter) rate.getAdapter(); //cast to an ArrayAdapter
@@ -40,7 +46,7 @@ public class EditRouteActivity extends AppCompatActivity {
         tags.setText(myTags);
         date.setText(route.getDate());
 
-        Button saveBtn = findViewById(R.id.btnDelete);
+        Button saveBtn = findViewById(R.id.btnSave);
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,9 +79,12 @@ public class EditRouteActivity extends AppCompatActivity {
 
                 Toast t = Toast.makeText(view.getContext(),"Successfully updated route!",Toast.LENGTH_LONG);
                 t.show();
-                setResult(1);
 
+                //create new intent to psss on updated route
+                final Intent i = new Intent();
+                i.putExtra("route",route);
 
+                setResult(Activity.RESULT_OK, i);
                 finish();
             }
         });

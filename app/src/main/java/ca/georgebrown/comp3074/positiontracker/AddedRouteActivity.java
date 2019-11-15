@@ -2,9 +2,7 @@ package ca.georgebrown.comp3074.positiontracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,12 +15,10 @@ import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 
 import ca.georgebrown.comp3074.positiontracker.model.Coordinates;
 import ca.georgebrown.comp3074.positiontracker.model.Route;
-import ca.georgebrown.comp3074.positiontracker.sql.DbContract;
 import ca.georgebrown.comp3074.positiontracker.sql.DbHelper;
 
 public class AddedRouteActivity extends AppCompatActivity {
@@ -44,7 +40,7 @@ public class AddedRouteActivity extends AppCompatActivity {
         date.setText(getDate());
 
         //View current Route button
-        Button mapsBtn = findViewById(R.id.btnDelete);
+        Button mapsBtn = findViewById(R.id.btnSave);
         mapsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
