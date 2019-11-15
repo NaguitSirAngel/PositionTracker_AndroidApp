@@ -2,7 +2,6 @@ package ca.georgebrown.comp3074.positiontracker.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Route implements Serializable {
 

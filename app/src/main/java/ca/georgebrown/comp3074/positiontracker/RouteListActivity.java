@@ -2,18 +2,13 @@ package ca.georgebrown.comp3074.positiontracker;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-
 import java.util.ArrayList;
-
-import androidx.fragment.app.FragmentManager;
 import ca.georgebrown.comp3074.positiontracker.model.Route;
 import ca.georgebrown.comp3074.positiontracker.sql.DbHelper;
 
@@ -46,16 +41,6 @@ public class RouteListActivity extends AppCompatActivity {
             }
         });
 
-
-        //Home button
-        Button homeBtn= findViewById(R.id.btnHome);
-        homeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
     }
 
     @Override
@@ -70,14 +55,8 @@ public class RouteListActivity extends AppCompatActivity {
     }
 
     public void updateList(){
-//        FragmentManager manager = getSupportFragmentManager();
-//        ItemFragment fragment =
-//                (ItemFragment) manager
-//                        .findFragmentById(R.id.fragment);
-//        fragment.updateView();
         ListView list = findViewById(R.id.list);
         RouteArrayAdapter adapter = new RouteArrayAdapter(this, R.layout.route_layout, routes);
         list.setAdapter(adapter);
-
     }
 }

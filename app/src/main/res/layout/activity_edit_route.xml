@@ -76,7 +76,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtDate" />
 
     <Button
-        android:id="@+id/btnDelete"
+        android:id="@+id/btnSave"
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -87,7 +87,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinRatings" />
 
-    <EditText
+    <TextView
         android:id="@+id/editDate"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
