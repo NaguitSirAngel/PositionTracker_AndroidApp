@@ -33,7 +33,8 @@ public class ViewRouteActivity extends AppCompatActivity {
         mapsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:43.6711247,-79.4141207"));
+//                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:43.6711247,-79.4141207"));
+                Intent i = new Intent(ViewRouteActivity.this, MapsActivity.class);
                 startActivity(i);
             }
         });
