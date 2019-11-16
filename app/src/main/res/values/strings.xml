@@ -8,7 +8,6 @@
     <string name="back">Back</string>
     <string name="copyright">Copyright @2019</string>
     <string-array name="rates">
-        <item>0</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
