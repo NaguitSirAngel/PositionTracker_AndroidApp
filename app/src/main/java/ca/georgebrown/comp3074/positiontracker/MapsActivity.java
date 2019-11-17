@@ -2,6 +2,7 @@ package ca.georgebrown.comp3074.positiontracker;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -10,6 +11,10 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
+
+import ca.georgebrown.comp3074.positiontracker.model.Coordinates;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -40,9 +45,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+//        Coordinates newCoor = new Coordinates();
+
+        PolylineOptions polylineOptions = new PolylineOptions();
+        polylineOptions.add(new LatLng(51.432739, -0.523061));
+        polylineOptions.add(new LatLng(51.429805, -0.549850));
+        polylineOptions.add(new LatLng( 51.425900, -0.560324));
+        polylineOptions.add(new LatLng( 51.436070, -0.566330));
+
+
+        polylineOptions.width(5).color(Color.RED);
+        mMap.addPolyline(polylineOptions);
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(51.432739, -0.523061),12));
+
+//         for(Coordinates c : coordinates){
+//            System.out.println(c.getLatitude() + "\t " + c.getLongitude());
+//        }
     }
 }

@@ -36,6 +36,7 @@ public class TrackingActivity extends AppCompatActivity {
 
         locationClient = LocationServices.getFusedLocationProviderClient(this);
 
+        //getting the last known location
         locationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(Location location) {
