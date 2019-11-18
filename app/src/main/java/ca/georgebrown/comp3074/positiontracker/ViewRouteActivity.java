@@ -65,11 +65,10 @@ public class ViewRouteActivity extends AppCompatActivity {
               //  sharingIntent.putExtra("route_id", route.getId());
                 String shareBody ="My route name";
                 String shareSubject = "From here to there";
-                sharingIntent.putExtra("shareBody",shareBody);
-                sharingIntent.putExtra("shareSubject",shareSubject);
-
+                sharingIntent.putExtra(sharingIntent.EXTRA_TEXT,shareBody);
+                sharingIntent.putExtra(sharingIntent.EXTRA_SUBJECT,shareSubject);
+                
                 startActivity(Intent.createChooser(sharingIntent,"Share using"));
-
                 Toast t = Toast.makeText(view.getContext(),"Route has been successfully shared!",Toast.LENGTH_LONG);
                 t.show();
             }
