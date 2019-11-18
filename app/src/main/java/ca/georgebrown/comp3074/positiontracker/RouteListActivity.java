@@ -15,8 +15,8 @@ import ca.georgebrown.comp3074.positiontracker.sql.DbHelper;
 public class RouteListActivity extends AppCompatActivity {
 
     public static int REQUEST_CODE = 1;
-    public static DbHelper dbHelper = null;
-    public static ArrayList<Route> routes = null;
+    public static DbHelper dbHelper;
+    public static ArrayList<Route> routes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,6 @@ public class RouteListActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
                 final Route route = ((Route) adapterView.getItemAtPosition(i));
                 Intent intent = new Intent(view.getContext(), ViewRouteActivity.class);
                 intent.putExtra("route", route);

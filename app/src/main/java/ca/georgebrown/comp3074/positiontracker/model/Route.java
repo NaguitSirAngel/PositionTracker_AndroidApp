@@ -10,7 +10,7 @@ public class Route implements Serializable {
     private String routeName;
     private String date;
     private ArrayList<String> tags;
-    private ArrayList<Coordinates> route;
+    private ArrayList<Coordinate> coordinates;
 
     public int getId() {
         return id;
@@ -52,11 +52,10 @@ public class Route implements Serializable {
         this.tags = tags;
     }
 
-    public ArrayList<Coordinates> getRoute() {
-        return route;
+    public ArrayList<Coordinate> getCoordinates() {
+        return coordinates;
     }
 
-    public void setRoute(ArrayList<Coordinates> route) {
-        this.route = route;
+    public void setCoordinates(ArrayList<Coordinate> coordinates) { this.coordinates = coordinates;
     }
 }

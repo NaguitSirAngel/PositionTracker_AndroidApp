@@ -17,67 +17,62 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import ca.georgebrown.comp3074.positiontracker.model.Coordinates;
+import ca.georgebrown.comp3074.positiontracker.model.Coordinate;
 import ca.georgebrown.comp3074.positiontracker.model.Route;
+import ca.georgebrown.comp3074.positiontracker.sql.DbContract;
 import ca.georgebrown.comp3074.positiontracker.sql.DbHelper;
 
 public class AddedRouteActivity extends AppCompatActivity {
+
+    private ArrayList<Coordinate> coordinates = null;
+    private DbHelper dbHelper;
+    private EditText routeName, routeTag;
+    private Spinner rate;
+    private TextView date;
+    private Button mapsBtn, addRouteBtn;
+    private long id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_added_route);
 
-        final DbHelper dbHelper = new DbHelper(this);
+        dbHelper = new DbHelper(this);
+
+        coordinates = (ArrayList<Coordinate>)getIntent().getExtras().getSerializable("coordinates");
+
+
 
         //getting route coordinates
-        final ArrayList<Coordinates> coordinates = (ArrayList<Coordinates>)getIntent().getExtras().getSerializable("coordinates");
+        routeName = findViewById(R.id.txtRouteName);
+        routeTag = findViewById(R.id.txtRouteTag);
+        rate = findViewById(R.id.spinner);
 
-        // TESTING
-        for(Coordinates c : coordinates){
-            System.out.println(c.getLatitude() + "\t " + c.getLongitude());
-        }
-        // TESTING
-
-
-        final EditText routeName = findViewById(R.id.txtRouteName);
-        final EditText routeTag = findViewById(R.id.txtRouteTag);
-        final Spinner rate = findViewById(R.id.spinner);
-
-        TextView date = findViewById(R.id.txtDate);
+        date = findViewById(R.id.txtDate);
         date.setText(getDate());
 
         //View current Route button
-        Button mapsBtn = findViewById(R.id.btnSave);
+        mapsBtn = findViewById(R.id.btnSave);
         mapsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:43.6711247,-79.4141207"));
+                Intent i = new Intent(AddedRouteActivity.this, MapsActivity.class);
+                i.putExtra("coordinates", coordinates);
                 startActivity(i);
             }
         });
 
+
         //Add new Route button
-        Button addRouteBtn = findViewById(R.id.btnAddRoute);
+        addRouteBtn = findViewById(R.id.btnAddRoute);
         addRouteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
 
-                //toast that shows added route
-                //Toast t = Toast.makeText(view.getContext(),"Route has been added!",Toast.LENGTH_LONG);
-                //t.show();
-
-                //example 1
-                //ArrayList<String> tags = new ArrayList<>();
-                ArrayList<Coordinates> coord = new ArrayList<>();
-
                 String rName = routeName.getText().toString();
                 String rTag = routeTag.getText().toString();
 
-                //ArrayList<String> tags = (ArrayList<String>)Arrays.asList(rTag.split(","));
                 String[] tags = rTag.split(",");
-
-                //tags.add(rTag);
 
                 int rRate = Integer.parseInt(rate.getSelectedItem().toString());
                 Route route = new Route();
@@ -85,8 +80,13 @@ public class AddedRouteActivity extends AppCompatActivity {
                 route.setRating(rRate);
                 route.setDate(getDate());
 
-                //dbHelper.addRoute(route);
-                long id = dbHelper.addRoute(route);
+                id = dbHelper.addRoute(route);
+
+
+                //add coordinates to the database
+                for(Coordinate coordinate : coordinates){
+                    dbHelper.addCoordinate(coordinate, dbHelper.getRoute(id));
+                }
 
                 if(tags.length>1){
                     for(String str : tags){
@@ -96,8 +96,8 @@ public class AddedRouteActivity extends AppCompatActivity {
                     dbHelper.addTag(rTag, id);
                 }
 
-
                 Toast.makeText(view.getContext(),"Successfully Added Route", Toast.LENGTH_LONG).show(); //bubble at the bottom
+
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -105,7 +105,7 @@ public class AddedRouteActivity extends AppCompatActivity {
                         setResult(RESULT_OK);
                         finish();
                     }
-                }, 1500);
+                }, 3000);
             }
         });
     }

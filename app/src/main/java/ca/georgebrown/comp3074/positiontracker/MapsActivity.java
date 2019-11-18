@@ -13,12 +13,15 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-import ca.georgebrown.comp3074.positiontracker.model.Coordinates;
+import java.util.ArrayList;
+
+import ca.georgebrown.comp3074.positiontracker.model.Coordinate;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+
+    private ArrayList<Coordinate> coordinates;
 
     private GoogleMap mMap;
 
@@ -31,6 +34,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        coordinates = (ArrayList<Coordinate>)getIntent().getExtras().getSerializable("coordinates");
     }
 
 
@@ -46,34 +51,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-         LatLng latLng = new LatLng(51.432739, -0.523061);
-
-        //Coordinates newCoor = new Coordinates();
+        LatLng startPoint = new LatLng(coordinates.get(0).getLatitude(), coordinates.get(0).getLongitude());
+        LatLng endPoint = new LatLng(coordinates.get(coordinates.size()-1).getLatitude(), coordinates.get(coordinates.size()-1).getLongitude());
 
         //Adding coordinates to a line
         PolylineOptions line = new PolylineOptions();
-        line.add(new LatLng(51.432739, -0.523061));
-        line.add(new LatLng(51.429805, -0.549850));
-        line.add(new LatLng( 51.425900, -0.560324));
-        line.add(new LatLng( 51.436070, -0.566330));
-
+        for (Coordinate c : coordinates){
+            line.add(new LatLng(c.getLatitude(), c.getLongitude()));
+        }
 
         line.width(5).color(Color.RED);
         mMap.addPolyline(line);
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(51.432739, -0.523061),12));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startPoint,16));
 
         Marker mStart = mMap.addMarker(new MarkerOptions()
-                .position(latLng).title("Start")
+                .position(startPoint).title("Start")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
         mStart.setTag(0);
 
         Marker mEnd = mMap.addMarker(new MarkerOptions()
-                .position(new LatLng( 51.436070, -0.566330)).title("End")
+                .position(endPoint).title("End")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
         mEnd.setTag(0);
-//         for(Coordinates c : coordinates){
-//            System.out.println(c.getLatitude() + "\t " + c.getLongitude());
-//        }
     }
+
 }
