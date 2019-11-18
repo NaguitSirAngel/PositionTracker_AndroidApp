@@ -44,7 +44,9 @@ public class DbHelper extends SQLiteOpenHelper {
         cv.put(DbContract.RouteEntity.COLUMN_NAME, route.getRouteName());
         cv.put(DbContract.RouteEntity.COLUMN_RATING, route.getRating());
         cv.put(DbContract.RouteEntity.COLUMN_DATE, route.getDate());
-        return db.insert(DbContract.RouteEntity.TABLE_NAME,null,cv);
+        long l = db.insert(DbContract.RouteEntity.TABLE_NAME,null,cv);
+        db.close();
+        return l;
     }
 
     //adds Coordinate
@@ -87,6 +89,7 @@ public class DbHelper extends SQLiteOpenHelper {
             route.setDate(cursor.getString(cursor.getColumnIndex(DbContract.RouteEntity.COLUMN_DATE)));
             routes.add(route);
         }
+        db.close();
         return routes;
     }
 
@@ -116,6 +119,7 @@ public class DbHelper extends SQLiteOpenHelper {
             coordinate.setTimestamp(cursor.getLong(cursor.getColumnIndex(DbContract.CoordinatesEntity.COLUMN_TIMESTAMP)));
             coordinates.add(coordinate);
         }
+        db.close();
         return coordinates;
     }
 
@@ -128,8 +132,10 @@ public class DbHelper extends SQLiteOpenHelper {
         cv.put(DbContract.RouteEntity.COLUMN_RATING, route.getRating());
 
         // updating row
-        return db.update(DbContract.RouteEntity.TABLE_NAME, cv, DbContract.RouteEntity._ID + " = ?",
+        int i = db.update(DbContract.RouteEntity.TABLE_NAME, cv, DbContract.RouteEntity._ID + " = ?",
                 new String[]{String.valueOf(route.getId())});
+        db.close();
+        return i;
     }
 
     //Deletes a Route
@@ -178,20 +184,6 @@ public class DbHelper extends SQLiteOpenHelper {
         return route;
     }
 
-    private Cursor getTags(String id){
-        SQLiteDatabase db = this.getReadableDatabase();
-        String[] projection = {DbContract.TagEntity._ID, DbContract.TagEntity.COLUMN_TAG, DbContract.TagEntity.COLUMN_ROUTEID};
-        String selection = DbContract.TagEntity.COLUMN_ROUTEID+"=?"; //WordContract.WordEntity.COLUMN_NAME_WORD1+"=?";
-        String[] selectionArgs = {id}; //{"test"}
-        return db.query(
-                DbContract.TagEntity.TABLE_NAME,  //table name
-                projection, //colums we select
-                selection, //columns for WHERE clause
-                selectionArgs, //parameters for where clause
-                null, //groupby
-                null, //having
-                null); //sorting
-    }
 
     //delete tags
     public void deleteTags(Route route){
@@ -202,17 +194,28 @@ public class DbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-
     //returns a string of tags
     public String stringTag(Route route){
-        String myTags = "";
-        Cursor c = getTags(String.valueOf(route.getId()));
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] projection = {DbContract.TagEntity._ID, DbContract.TagEntity.COLUMN_TAG, DbContract.TagEntity.COLUMN_ROUTEID};
+        String selection = DbContract.TagEntity.COLUMN_ROUTEID+"=?"; //WordContract.WordEntity.COLUMN_NAME_WORD1+"=?";
+        String[] selectionArgs = {String.valueOf(route.getId())}; //{"test"}
+        Cursor c =  db.query(
+                DbContract.TagEntity.TABLE_NAME,  //table name
+                projection, //colums we select
+                selection, //columns for WHERE clause
+                selectionArgs, //parameters for where clause
+                null, //groupby
+                null, //having
+                null); //sorting
+        String myTags;
         List l = new ArrayList();
         while (c.moveToNext()){
             String w = c.getString(c.getColumnIndex(DbContract.TagEntity.COLUMN_TAG));
             l.add(w);
         }
         myTags = android.text.TextUtils.join(",", l);
+        db.close();
         return myTags;
     }
 
@@ -226,4 +229,5 @@ public class DbHelper extends SQLiteOpenHelper {
         db.close();
         return l;
     }
+
 }

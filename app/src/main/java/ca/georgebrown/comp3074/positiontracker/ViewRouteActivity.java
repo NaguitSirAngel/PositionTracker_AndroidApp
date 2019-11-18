@@ -72,6 +72,7 @@ public class ViewRouteActivity extends AppCompatActivity {
             public void onClick(View view) {
                 dbHelper.deleteRoute(route);
                 dbHelper.deleteCoordinates(route.getId());
+                dbHelper.deleteTags(route);
                 Toast.makeText(view.getContext(),"Route deleted!", Toast.LENGTH_LONG).show();
                 setResult(RESULT_OK);
                 finish();
