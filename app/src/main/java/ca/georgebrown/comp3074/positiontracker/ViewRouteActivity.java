@@ -60,6 +60,16 @@ public class ViewRouteActivity extends AppCompatActivity {
         shareBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+              //  sharingIntent.putExtra("route_id", route.getId());
+                String shareBody ="My route name";
+                String shareSubject = "From here to there";
+                sharingIntent.putExtra("shareBody",shareBody);
+                sharingIntent.putExtra("shareSubject",shareSubject);
+
+                startActivity(Intent.createChooser(sharingIntent,"Share using"));
+
                 Toast t = Toast.makeText(view.getContext(),"Route has been successfully shared!",Toast.LENGTH_LONG);
                 t.show();
             }
