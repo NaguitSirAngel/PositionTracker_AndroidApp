@@ -57,7 +57,7 @@
         android:layout_marginTop="36dp"
         android:text="Tracking"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="#F8000000"
+        android:textColor="#9E000000"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
