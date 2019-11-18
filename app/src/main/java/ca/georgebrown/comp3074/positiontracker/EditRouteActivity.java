@@ -16,8 +16,6 @@ import android.widget.Toast;
 import ca.georgebrown.comp3074.positiontracker.model.Route;
 import ca.georgebrown.comp3074.positiontracker.sql.DbHelper;
 
-import static ca.georgebrown.comp3074.positiontracker.RouteListActivity.REQUEST_CODE;
-
 public class EditRouteActivity extends AppCompatActivity {
 
     @Override

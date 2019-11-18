@@ -23,21 +23,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private ArrayList<Coordinate> coordinates;
 
-    private GoogleMap mMap;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        // retrieve coordinates
         coordinates = (ArrayList<Coordinate>)getIntent().getExtras().getSerializable("coordinates");
     }
-
 
     /**
      * Manipulates the map once available.
@@ -50,7 +47,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+        GoogleMap mMap = googleMap;
+
+        //setting up the starting position and ending position for marker
         LatLng startPoint = new LatLng(coordinates.get(0).getLatitude(), coordinates.get(0).getLongitude());
         LatLng endPoint = new LatLng(coordinates.get(coordinates.size()-1).getLatitude(), coordinates.get(coordinates.size()-1).getLongitude());
 
@@ -59,21 +58,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         for (Coordinate c : coordinates){
             line.add(new LatLng(c.getLatitude(), c.getLongitude()));
         }
-
         line.width(5).color(Color.RED);
         mMap.addPolyline(line);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startPoint,19));
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startPoint,16));
-
+        //Starting position marker
         Marker mStart = mMap.addMarker(new MarkerOptions()
                 .position(startPoint).title("Start")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
         mStart.setTag(0);
 
+        //Ending position marker
         Marker mEnd = mMap.addMarker(new MarkerOptions()
                 .position(endPoint).title("End")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
         mEnd.setTag(0);
     }
-
 }

@@ -50,6 +50,7 @@ public class ViewRouteActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(ViewRouteActivity.this, EditRouteActivity.class);
+                i.putExtra("route_id", route.getId());
                 startActivityForResult(i,REQUEST_CODE);
             }
         });
@@ -64,18 +65,18 @@ public class ViewRouteActivity extends AppCompatActivity {
             }
         });
 
-        //Deleting a Route
+        //Deleting a Route and its coordinates
         Button deleteBtn = findViewById(R.id.btnSave);
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dbHelper.deleteRoute(route);
+                dbHelper.deleteCoordinates(route.getId());
                 Toast.makeText(view.getContext(),"Route deleted!", Toast.LENGTH_LONG).show();
                 setResult(RESULT_OK);
                 finish();
             }
         });
-
     }
 
     @Override

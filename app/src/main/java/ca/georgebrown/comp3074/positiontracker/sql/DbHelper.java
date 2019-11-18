@@ -11,7 +11,6 @@ import java.util.List;
 
 import ca.georgebrown.comp3074.positiontracker.model.Coordinate;
 import ca.georgebrown.comp3074.positiontracker.model.Route;
-import ca.georgebrown.comp3074.positiontracker.model.Tag;
 
 public class DbHelper extends SQLiteOpenHelper {
 
@@ -45,31 +44,7 @@ public class DbHelper extends SQLiteOpenHelper {
         cv.put(DbContract.RouteEntity.COLUMN_NAME, route.getRouteName());
         cv.put(DbContract.RouteEntity.COLUMN_RATING, route.getRating());
         cv.put(DbContract.RouteEntity.COLUMN_DATE, route.getDate());
-
-        long addReturn = db.insert(DbContract.RouteEntity.TABLE_NAME,null,cv);
-        db.close();
-        return addReturn;
-    }
-
-
-    //adds Tags
-//    public long addTags(Tag tag, Route route){
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        ContentValues cv =new ContentValues();
-//        cv.put(DbContract.TagEntity.COLUMN_TAG, tag.getTagName());
-//        cv.put(DbContract.TagEntity.COLUMN_ROUTEID, route.getId());
-//        long addReturn = db.insert(DbContract.TagEntity.TABLE_NAME,null,cv);
-//        db.close();
-//        return addReturn;
-//    }
-
-    //delete tags
-    public void deleteTags(Route route){
-        SQLiteDatabase db = this.getWritableDatabase();
-        String tableName = DbContract.TagEntity.TABLE_NAME;
-        String whereClause = DbContract.TagEntity.COLUMN_ROUTEID+ "=" + route.getId();
-        db.delete(tableName, whereClause, null);
-        db.close();
+        return db.insert(DbContract.RouteEntity.TABLE_NAME,null,cv);
     }
 
     //adds Coordinate
@@ -86,6 +61,7 @@ public class DbHelper extends SQLiteOpenHelper {
         return addReturn;
     }
 
+    //returns a list of routs
     public ArrayList<Route> getAllRoutes(){
         ArrayList<Route> routes = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -114,6 +90,7 @@ public class DbHelper extends SQLiteOpenHelper {
         return routes;
     }
 
+    //gets all coordinates of corresponding route
     public ArrayList<Coordinate> getAllCoordinates(int id){
         ArrayList<Coordinate> coordinates = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -155,7 +132,6 @@ public class DbHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(route.getId())});
     }
 
-
     //Deletes a Route
     public void deleteRoute(Route route){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -169,7 +145,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public void deleteCoordinates(int routeId){
         SQLiteDatabase db = this.getWritableDatabase();
         String tableName = DbContract.CoordinatesEntity.TABLE_NAME;
-        String whereClause = DbContract.CoordinatesEntity.COLUMN_ROUTEID + " " + routeId;
+        String whereClause = DbContract.CoordinatesEntity.COLUMN_ROUTEID + " = " + routeId;
         db.delete(tableName, whereClause, null);
         db.close();
     }
@@ -202,7 +178,7 @@ public class DbHelper extends SQLiteOpenHelper {
         return route;
     }
 
-    public Cursor getTags(String id){
+    private Cursor getTags(String id){
         SQLiteDatabase db = this.getReadableDatabase();
         String[] projection = {DbContract.TagEntity._ID, DbContract.TagEntity.COLUMN_TAG, DbContract.TagEntity.COLUMN_ROUTEID};
         String selection = DbContract.TagEntity.COLUMN_ROUTEID+"=?"; //WordContract.WordEntity.COLUMN_NAME_WORD1+"=?";
@@ -216,6 +192,16 @@ public class DbHelper extends SQLiteOpenHelper {
                 null, //having
                 null); //sorting
     }
+
+    //delete tags
+    public void deleteTags(Route route){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String tableName = DbContract.TagEntity.TABLE_NAME;
+        String whereClause = DbContract.TagEntity.COLUMN_ROUTEID+ " = " + route.getId();
+        db.delete(tableName, whereClause, null);
+        db.close();
+    }
+
 
     //returns a string of tags
     public String stringTag(Route route){
@@ -236,7 +222,8 @@ public class DbHelper extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
         cv.put(DbContract.TagEntity.COLUMN_TAG, word1);
         cv.put(DbContract.TagEntity.COLUMN_ROUTEID, id);
-        return db.insert(DbContract.TagEntity.TABLE_NAME, null, cv);
+        long l = db.insert(DbContract.TagEntity.TABLE_NAME, null, cv);
+        db.close();
+        return l;
     }
-
 }

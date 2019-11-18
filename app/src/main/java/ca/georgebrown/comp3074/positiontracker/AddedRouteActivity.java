@@ -3,7 +3,6 @@ package ca.georgebrown.comp3074.positiontracker;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -19,7 +18,6 @@ import java.util.Calendar;
 
 import ca.georgebrown.comp3074.positiontracker.model.Coordinate;
 import ca.georgebrown.comp3074.positiontracker.model.Route;
-import ca.georgebrown.comp3074.positiontracker.sql.DbContract;
 import ca.georgebrown.comp3074.positiontracker.sql.DbHelper;
 
 public class AddedRouteActivity extends AppCompatActivity {
@@ -39,11 +37,9 @@ public class AddedRouteActivity extends AppCompatActivity {
 
         dbHelper = new DbHelper(this);
 
+        //retrieving route coordinates
         coordinates = (ArrayList<Coordinate>)getIntent().getExtras().getSerializable("coordinates");
 
-
-
-        //getting route coordinates
         routeName = findViewById(R.id.txtRouteName);
         routeTag = findViewById(R.id.txtRouteTag);
         rate = findViewById(R.id.spinner);
@@ -62,13 +58,11 @@ public class AddedRouteActivity extends AppCompatActivity {
             }
         });
 
-
         //Add new Route button
         addRouteBtn = findViewById(R.id.btnAddRoute);
         addRouteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-
                 String rName = routeName.getText().toString();
                 String rTag = routeTag.getText().toString();
 
@@ -81,7 +75,6 @@ public class AddedRouteActivity extends AppCompatActivity {
                 route.setDate(getDate());
 
                 id = dbHelper.addRoute(route);
-
 
                 //add coordinates to the database
                 for(Coordinate coordinate : coordinates){
@@ -96,8 +89,11 @@ public class AddedRouteActivity extends AppCompatActivity {
                     dbHelper.addTag(rTag, id);
                 }
 
-                Toast.makeText(view.getContext(),"Successfully Added Route", Toast.LENGTH_LONG).show(); //bubble at the bottom
+                Toast.makeText(view.getContext(),"Successfully Added Route", Toast.LENGTH_LONG).show();
 
+                //Disables button to ensure no duplicate entry is added
+                mapsBtn.setClickable(false);
+                addRouteBtn.setClickable(false);
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -105,7 +101,7 @@ public class AddedRouteActivity extends AppCompatActivity {
                         setResult(RESULT_OK);
                         finish();
                     }
-                }, 3000);
+                }, 2000);
             }
         });
     }
