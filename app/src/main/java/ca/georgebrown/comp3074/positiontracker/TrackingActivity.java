@@ -63,6 +63,7 @@ public class TrackingActivity extends AppCompatActivity {
         stopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                coordinates.remove(0);
                 finish();
                 Intent i = new Intent(view.getContext(), AddedRouteActivity.class);
                 i.putExtra("coordinates", coordinates);
