@@ -58,7 +58,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         for (Coordinate c : coordinates){
             line.add(new LatLng(c.getLatitude(), c.getLongitude()));
         }
-        line.width(5).color(Color.RED);
+        line.width(5).color(Color.BLUE);
         mMap.addPolyline(line);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startPoint,19));
 
