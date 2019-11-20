@@ -16,8 +16,6 @@ import android.widget.Toast;
 import ca.georgebrown.comp3074.positiontracker.model.Route;
 import ca.georgebrown.comp3074.positiontracker.sql.DbHelper;
 
-import static ca.georgebrown.comp3074.positiontracker.RouteListActivity.REQUEST_CODE;
-
 public class EditRouteActivity extends AppCompatActivity {
 
     @Override
@@ -32,7 +30,6 @@ public class EditRouteActivity extends AppCompatActivity {
         final EditText tags = findViewById(R.id.editTags);
         final TextView date = findViewById(R.id.editDate);
 
-//        final Route route = (Route)getIntent().getExtras().getSerializable("route");
         int routeId = getIntent().getExtras().getInt("route_id");
         final Route route = dbHelper.getRoute(routeId);
         String myTags = dbHelper.stringTag(route);
@@ -58,9 +55,7 @@ public class EditRouteActivity extends AppCompatActivity {
                 int rRate = Integer.parseInt(rate.getSelectedItem().toString());
 
                 route.setRouteName(rName);
-//              route.setTags(tags);
                 route.setRating(rRate);
-
                 dbHelper.updateRoute(route);
 
                 //dbHelper.addRoute(route);

@@ -2,7 +2,7 @@ package ca.georgebrown.comp3074.positiontracker.model;
 
 import java.io.Serializable;
 
-public class Coordinates implements Serializable {
+public class Coordinate implements Serializable {
 
     private int idCoord;
     private int idRoute;

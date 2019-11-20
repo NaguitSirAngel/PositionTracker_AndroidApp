@@ -3,58 +3,54 @@ package ca.georgebrown.comp3074.positiontracker;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.util.ArrayList;
 
-import ca.georgebrown.comp3074.positiontracker.model.Coordinates;
+import ca.georgebrown.comp3074.positiontracker.model.Coordinate;
 
 public class TrackingActivity extends AppCompatActivity {
 
     private FusedLocationProviderClient locationClient;
     private LocationCallback locationCallback;
+    private ImageView loading;
+    private AnimationDrawable animationDrawable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking);
 
-        final ArrayList<Coordinates> coordinates = new ArrayList<>();
+        final ArrayList<Coordinate> coordinates = new ArrayList<>();
 
         Button stopBtn = findViewById(R.id.btnStop);
         Button cancelBtn = findViewById(R.id.btnCancel);
 
-        locationClient = LocationServices.getFusedLocationProviderClient(this);
+        // TRACKING ANIMATION
+        loading = findViewById(R.id.imageViewLoading);
+        loading.setBackgroundResource(R.drawable.animation_loading);
+        animationDrawable = (AnimationDrawable)loading.getBackground();
+        animationDrawable.start();
 
-        locationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if(location != null){
-                    Coordinates coordinate = new Coordinates();
-                    coordinate.setLatitude(location.getLatitude());
-                    coordinate.setLongitude(location.getLongitude());
-                    coordinate.setAccuracy(location.getAccuracy());
-                    coordinate.setTimestamp(location.getTime());
-                    coordinates.add(coordinate);
-                }
-            }
-        });
+
+        locationClient = LocationServices.getFusedLocationProviderClient(this);
 
         locationCallback = new LocationCallback(){
             @Override
             public void onLocationResult(LocationResult locationResult) {
                 Location location = locationResult.getLastLocation();
-                Coordinates coordinate = new Coordinates();
+                Coordinate coordinate = new Coordinate();
                 coordinate.setLatitude(location.getLatitude());
                 coordinate.setLongitude(location.getLongitude());
                 coordinate.setAccuracy(location.getAccuracy());
@@ -67,8 +63,8 @@ public class TrackingActivity extends AppCompatActivity {
         stopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                coordinates.remove(0);
                 finish();
-                stopTrackingLocation();
                 Intent i = new Intent(view.getContext(), AddedRouteActivity.class);
                 i.putExtra("coordinates", coordinates);
                 startActivity(i);
@@ -86,7 +82,7 @@ public class TrackingActivity extends AppCompatActivity {
 
     private void startTrackingLocation(){
         LocationRequest lr = new LocationRequest();
-        lr.setInterval(5000);
+        lr.setInterval(3000);
         lr.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         locationClient.requestLocationUpdates(lr, locationCallback, null);
     }
