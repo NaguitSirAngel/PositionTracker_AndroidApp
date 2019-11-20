@@ -5,8 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import java.util.ArrayList;
 import ca.georgebrown.comp3074.positiontracker.model.Route;
@@ -14,9 +18,11 @@ import ca.georgebrown.comp3074.positiontracker.sql.DbHelper;
 
 public class RouteListActivity extends AppCompatActivity {
 
-    public static int REQUEST_CODE = 1;
-    public static DbHelper dbHelper;
-    public static ArrayList<Route> routes;
+    private static int REQUEST_CODE = 1;
+    private static DbHelper dbHelper;
+    private static ArrayList<Route> routes;
+    private EditText search;
+    private Button refresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +46,34 @@ public class RouteListActivity extends AppCompatActivity {
             }
         });
 
+        search = findViewById(R.id.txtSearch);
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                adapter.getFilter().filter(charSequence);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        refresh = findViewById(R.id.btnRefresh);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                overridePendingTransition(0,0);
+                startActivity(getIntent());
+                overridePendingTransition(0,0);
+            }
+        });
     }
 
     @Override
@@ -47,6 +81,7 @@ public class RouteListActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==REQUEST_CODE){
             if(resultCode== Activity.RESULT_OK){
+                search.setText("");
                 routes = dbHelper.getAllRoutes();
                 updateList();
             }
