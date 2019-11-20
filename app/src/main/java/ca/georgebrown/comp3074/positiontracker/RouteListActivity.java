@@ -64,16 +64,21 @@ public class RouteListActivity extends AppCompatActivity {
             }
         });
 
+        //refresh button
         refresh = findViewById(R.id.btnRefresh);
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
-                overridePendingTransition(0,0);
-                startActivity(getIntent());
-                overridePendingTransition(0,0);
+                refreshList();
             }
         });
+    }
+
+    private void refreshList(){
+        finish();
+        overridePendingTransition(0,0);
+        startActivity(getIntent());
+        overridePendingTransition(0,0);
     }
 
     @Override
@@ -82,15 +87,10 @@ public class RouteListActivity extends AppCompatActivity {
         if(requestCode==REQUEST_CODE){
             if(resultCode== Activity.RESULT_OK){
                 search.setText("");
-                routes = dbHelper.getAllRoutes();
-                updateList();
+                finish();
+                startActivity(getIntent());
             }
         }
     }
 
-    public void updateList(){
-        ListView list = findViewById(R.id.list);
-        RouteArrayAdapter adapter = new RouteArrayAdapter(this, R.layout.route_layout, routes);
-        list.setAdapter(adapter);
-    }
 }
